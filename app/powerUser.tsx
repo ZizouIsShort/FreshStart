@@ -1,13 +1,17 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
+import {router} from "expo-router";
 
 export default function PowerWalaUser() {
+    const takeToSchool = async () => {
+        router.push('/createSchool')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.naamKaam}>
-                    <Text style={styles.naam}>Jayadeep Mc</Text>
-                    <Text style={styles.kaam}>Stripper at CC</Text>
+                    <Text style={styles.naam}>Power</Text>
+                    <Text style={styles.kaam}>Power User</Text>
                 </View>
                 <View style={styles.rightWaala}>
                     <Image source={require('../assets/btnNotifications.png')}/>
@@ -26,7 +30,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
+                    <TouchableOpacity onPress={takeToSchool}>
+                        <Image source={require('../assets/Vector 3.png')}  />
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.taskDiv}>
