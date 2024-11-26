@@ -13,14 +13,14 @@
     "expo": "~51.0.18",
     "expo-image": "~1.13.0",
     "expo-linking": "~6.3.1",
+    "expo-location": "~17.0.1",
     "expo-router": "~3.5.24",
     "expo-status-bar": "~1.12.1",
     "lucide-react-native": "^0.461.0",
     "react": "18.2.0",
     "react-native": "0.74.5",
     "react-native-element-dropdown": "^2.12.2",
-    "react-native-maps": "1.14.0",
-    "expo-location": "~17.0.1"
+    "react-native-maps": "1.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
