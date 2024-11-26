@@ -163,7 +163,16 @@ export default function HomeScreen() {
                                     latitudeDelta: 0.0922,
                                     longitudeDelta: 0.0421,
                                 }}
-                            />
+                            >
+                                <Marker
+                                    coordinate={{
+                                        latitude: parseFloat(studentLocation.data.location.latitude),
+                                        longitude: parseFloat(studentLocation.data.location.longitude),
+                                    }}
+                                    title="Student Location"
+                                    description="This is a marker for Student Current Location"
+                                />
+                            </MapView>
                         </View>
                     )}
 
