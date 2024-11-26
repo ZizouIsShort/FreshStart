@@ -27,7 +27,13 @@ export default function App() {
             const result = await response.json()
             if(response.ok){
                 console.log('Login Successful', result)
-                router.push('/explore')
+                const role = result.success_prop.data.role;
+                if (role == 'power') {
+                    router.push('/powerUser')
+                }
+                else {
+                    router.push('/explore')
+                }
             }
             else{
                 Alert.alert('Error', result.message || 'Login Failed');

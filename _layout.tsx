@@ -5,6 +5,7 @@ export default function Layout() {
         <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="smth" options={{ title: 'Other Screen' }} />
+            <Stack.Screen name="powerUser" options={{ title: 'Power Home' }} />
         </Stack>
     );
 }
