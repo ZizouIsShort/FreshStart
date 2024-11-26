@@ -32,7 +32,7 @@ export default function App() {
                     router.push('/powerUser')
                 }
                 else if (role == 'student') {
-                    router.push('/home')
+                    router.push('/home-student')
                 }
                 else if(role == 'coordinator') {
                     router.push('/coordinator')
