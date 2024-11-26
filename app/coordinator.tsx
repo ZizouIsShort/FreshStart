@@ -1,7 +1,16 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
+import {router} from "expo-router";
 
 export default function PowerWalaUser() {
+    const takeToCreateBus = async () => {
+        router.push('/createBus')
+    }
+
+    const takeToCreateDriver = async () => {
+        router.push('/createDriver')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -38,7 +47,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
+                    <TouchableOpacity onPress={takeToCreateBus}>
+                        <Image source={require('../assets/Vector 3.png')}  />
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -49,7 +60,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
+                    <TouchableOpacity onPress={takeToCreateDriver}>
                     <Image source={require('../assets/Vector 3.png')} />
+                    </TouchableOpacity>
                 </View>
             </View>
 
