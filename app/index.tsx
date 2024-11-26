@@ -37,6 +37,9 @@ export default function App() {
                 else if(role == 'coordinator') {
                     router.push('/coordinator')
                 }
+                else if(role == 'driver') {
+                    router.push('/driver')
+                }
                 else {
                     router.push('/explore')
                 }

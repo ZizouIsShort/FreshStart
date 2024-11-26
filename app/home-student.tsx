@@ -33,16 +33,30 @@ interface ApiResponse2{
         }
     }
 }
+// interface DriverResponse{
+//     success: boolean;
+//     message: string;
+//     data: {
+//         drivers: {
+//             id: string;
+//             name: string;
+//             contactNo: string;
+//             schoolID: string;
+//         }
+//     }
+// }
 
 export default function HomeScreen() {
     const [studentData, setStudentData] = useState<ApiResponse | null>(null);
     const [studentLocation, setStudentLocation] = useState<ApiResponse2 | null>(null);
+    // const [driverData, setDriverInfo] = useState<DriverResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         fetchStudentData();
         fetchStudentLocation();
+        // fetchDriver();
     }, []);
 
     const fetchStudentData = async () => {
@@ -74,7 +88,6 @@ export default function HomeScreen() {
     };
     const fetchStudentLocation = async () => {
         try {
-            setLoading(true);
             const response = await fetch(`${process.env.EXPO_PUBLIC_HOST}/v1/student/_/location`, {
                 method: 'GET',
                 headers: {
@@ -95,10 +108,33 @@ export default function HomeScreen() {
             console.error('Error fetching student data:', error);
             setError(error instanceof Error ? error.message : 'Network error');
             setStudentLocation(null);
-        } finally {
-            setLoading(false);
         }
     };
+
+    // const fetchDriver = async () => {
+    //     try {
+    //         const response = await fetch(`${process.env.EXPO_PUBLIC_HOST}/v1/school/_/driver`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         });
+    //
+    //         const result: DriverResponse = await response.json();
+    //
+    //         if (result.success) {
+    //             setDriverInfo(result);
+    //             setError(null);
+    //         } else {
+    //             setError(result.message || 'No user data found');
+    //             setDriverInfo(null);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching driver data:', error);
+    //         setError(error instanceof Error ? error.message : 'Network error');
+    //         setDriverInfo(null);
+    //     }
+    // };
 
     if (loading) {
         return (
@@ -147,8 +183,10 @@ export default function HomeScreen() {
                         <Text style={styles.sectionTitle}>Tasks</Text>
                         <TouchableOpacity style={styles.taskCard}>
                             <View>
-                                <Text style={styles.taskTitle}>Reg No. : {studentData.data.user.registrationNo}</Text>
-                                <Text style={styles.taskStatus}>{studentData.data.user.studentClass}</Text>
+                                <Text style={styles.taskTitle}>{studentData.data.user.registrationNo}</Text>
+                                <Text style={styles.taskStatus}>Class: {studentData.data.user.studentClass}</Text>
+                                {/*<Text style={styles.taskTitle}>Driver Name : {driverData.data.drivers.name}</Text>*/}
+                                {/*<Text style={styles.taskStatus}>Contact: {driverData.data.drivers.contactNo}</Text>*/}
                             </View>
                         </TouchableOpacity>
                     </View>

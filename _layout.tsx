@@ -9,6 +9,7 @@ export default function Layout() {
             <Stack.Screen name="coordinator" options={{ title: 'Coordinator Home' }} />
             <Stack.Screen name="home-student" options={{ title: 'Home Student' }} />
             <Stack.Screen name="createSchool" options={{title: 'Creating School'}}/>
+            <Stack.Screen name="driver" options={{title: 'Driver'}}/>
             <Stack.Screen name="createCoordinator" options={{title: 'Creating Coordinator'}}></Stack.Screen>
         </Stack>
     );
