@@ -58,6 +58,9 @@ export default function App() {
     }
     console.warn("latitude: ", latitude);
     console.warn("longitude: ", longitude);
+
+    setInterval(kahaHai, 2000);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
