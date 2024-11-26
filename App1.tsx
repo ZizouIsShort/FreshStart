@@ -43,7 +43,7 @@ export default function App1() {
       <View style={styles.container}>
         <View style={styles.div}>
           <Image
-              source={require('./assets/image2.png')}
+              source={require('./assets/Logo.png')}
               style={styles.image}
           />
         </View>
