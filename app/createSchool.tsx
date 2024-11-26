@@ -6,6 +6,8 @@ export default function ExploreScreen() {
     const[skNm, setSchoolName] =  useState('');
     const[skLoc, setSchoolLoc] = useState('');
 
+
+
     const addingSchool = async () => {
         if(!skNm || !skLoc) {
             Alert.alert('Error', 'Please fill in all the fields')

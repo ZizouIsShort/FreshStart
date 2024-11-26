@@ -1,8 +1,36 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
 import {router} from "expo-router";
+import {useState} from "react";
 
 export default function PowerWalaUser() {
+    const [lastSchoolName, setLastSchoolName] = useState('School-1');
+    const [lastSchoolLoc, setLastSchoolLoc] = useState('Location');
+    const refreshing = async () => {
+        try {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_HOST}/v1/school`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                const lastSchool = result.data.schools[result.data.schools.length - 1];
+                setLastSchoolName(lastSchool.name);
+                setLastSchoolLoc(lastSchool.location);
+                console.log(lastSchool.name);
+            } else {
+                console.log('Error fetching schools');
+            }
+        } catch (error) {
+            console.error('Error in refreshing:', error);
+        }
+    }
+
     const takeToSchool = async () => {
         router.push('/createSchool')
     }
@@ -45,11 +73,13 @@ export default function PowerWalaUser() {
                     <Image source={require('../assets/Vector 3.png')} />
                 </View>
             </View>
-            <Text style={styles.task}>Schools Added</Text>
+            <TouchableOpacity onPress={refreshing}>
+                <Text style={styles.task}>Schools Added</Text>
+            </TouchableOpacity>
             <View style={styles.badaDiv}>
                 <View style={styles.chotaDiv}>
-                    <Text style={styles.txt} >School-1</Text>
-                    <MapView style={styles.map} />
+                    <Text style={styles.txt}>{lastSchoolName}</Text>
+                    <Text style={styles.txt}>{lastSchoolLoc}</Text>
                 </View>
             </View>
         </View>
@@ -146,9 +176,10 @@ const styles = StyleSheet.create({
     chotaDiv: {
         flexDirection: "column",
         backgroundColor: '#90DEFB',
-        height: '75%',
+        height: '35%',
         alignItems: "center",
         padding: 10,
         borderRadius: 7.5,
+        justifyContent: "space-between",
     },
 });

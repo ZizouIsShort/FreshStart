@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+//@ts-ignore
 import { Bell, Menu, User, Home, Plus, UserCircle, ChevronRight } from 'lucide-react-native';
 import MapView from 'react-native-maps';
 import {useNavigation} from "expo-router";
@@ -28,7 +29,7 @@ export default function HomeScreen() {
             {/* Header */}
             <View style={styles.header}>
                 <View>
-                    <Text style={styles.name}>{studentData.name}</Text>
+                    <Text style={styles.name}>Name</Text>
                     <Text style={styles.role}>Role</Text>
                 </View>
                 <View style={styles.headerIcons}>
