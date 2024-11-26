@@ -56,7 +56,7 @@ export default function PowerWalaUser() {
             </View>
             <View style={styles.belowHeader}>
                 <Image source={require('../assets/img.png')}/>
-                <Text style={styles.wlcm}>Welcome Madafaka</Text>
+                <Text style={styles.wlcm}>Welcome Power User</Text>
             </View>
             <Text style={styles.task}>Tasks</Text>
             <View style={styles.taskDiv}>
