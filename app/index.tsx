@@ -31,6 +31,9 @@ export default function App() {
                 if (role == 'power') {
                     router.push('/powerUser')
                 }
+                else if (role == 'student') {
+                    router.push('/home')
+                }
                 else if(role == 'coordinator') {
                     router.push('/coordinator')
                 }
@@ -52,7 +55,7 @@ export default function App() {
         <View style={styles.container}>
             <View style={styles.div}>
                 <Image
-                    source={require('../assets/image2.png')}
+                    source={require('../assets/Logo.png')}
                     style={styles.image}
                 />
             </View>
