@@ -1,11 +1,16 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
 import {router} from "expo-router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function PowerWalaUser() {
     const [lastSchoolName, setLastSchoolName] = useState('School-1');
     const [lastSchoolLoc, setLastSchoolLoc] = useState('Location');
+
+    useEffect(() => {
+        refreshing()
+    }, []);
+
     const refreshing = async () => {
         try {
             const response = await fetch(`${process.env.EXPO_PUBLIC_HOST}/v1/school`, {
@@ -33,6 +38,9 @@ export default function PowerWalaUser() {
 
     const takeToSchool = async () => {
         router.push('/createSchool')
+    }
+    const takeToCoor = async () => {
+        router.push('/createCoordinator')
     }
     return (
         <View style={styles.container}>
@@ -70,7 +78,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
+                    <TouchableOpacity onPress={takeToCoor}>
+                        <Image source={require('../assets/Vector 3.png')}  />
+                    </TouchableOpacity>
                 </View>
             </View>
             <TouchableOpacity onPress={refreshing}>
