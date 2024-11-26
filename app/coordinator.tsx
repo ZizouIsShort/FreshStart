@@ -15,8 +15,8 @@ export default function PowerWalaUser() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.naamKaam}>
-                    <Text style={styles.naam}>Jayadeep Mc</Text>
-                    <Text style={styles.kaam}>Stripper at CC</Text>
+                    <Text style={styles.naam}>Name</Text>
+                    <Text style={styles.kaam}>Coordinator</Text>
                 </View>
                 <View style={styles.rightWaala}>
                     <Image source={require('../assets/btnNotifications.png')}/>
@@ -25,7 +25,7 @@ export default function PowerWalaUser() {
             </View>
             <View style={styles.belowHeader}>
                 <Image source={require('../assets/img.png')}/>
-                <Text style={styles.wlcm}>Welcome Madafaka</Text>
+                <Text style={styles.wlcm}>Welcome Name</Text>
             </View>
             <Text style={styles.task}>Tasks</Text>
             <View style={styles.grid}>
