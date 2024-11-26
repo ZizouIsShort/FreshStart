@@ -31,6 +31,9 @@ export default function App() {
                 if (role == 'power') {
                     router.push('/powerUser')
                 }
+                else if(role == 'coordinator') {
+                    router.push('/coordinator')
+                }
                 else {
                     router.push('/explore')
                 }
