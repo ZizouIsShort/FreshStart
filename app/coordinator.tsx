@@ -1,6 +1,23 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
 import {router} from "expo-router";
+import {useEffect, useState} from "react";
+
+interface ApiResponse {
+    success: boolean;
+    message: string;
+    data: {
+        user: {
+            id: string;
+            email: string;
+            image: string;
+            role: string;
+            name: string;
+            schoolID: string;
+        }
+    }
+
+}
 
 export default function PowerWalaUser() {
     const takeToCreateBus = async () => {
@@ -14,13 +31,50 @@ export default function PowerWalaUser() {
     const takeToCreateStudent = async () => {
         router.push('/createStudent')
     }
+    const [coordinatorData, setCoordinatorData] = useState<ApiResponse | null>(null);
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        fetchCoordinatorData();
+
+    }, []);
+
+    const fetchCoordinatorData = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${process.env.EXPO_PUBLIC_HOST}/v1/auth/_`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const result: ApiResponse = await response.json();
+
+            if (result.success && result.data?.user) {
+                setCoordinatorData(result);
+                setError(null);
+            } else {
+                setError(result.message || 'No user data found');
+                setCoordinatorData(null);
+            }
+        } catch (error) {
+            console.error('Error fetching coordinator data:', error);
+            setError(error instanceof Error ? error.message : 'Network error');
+            setCoordinatorData(null);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.naamKaam}>
-                    <Text style={styles.naam}>Name</Text>
-                    <Text style={styles.kaam}>Coordinator</Text>
+                    <Text style={styles.naam}>{coordinatorData?.data.user.email}</Text>
+                    <Text style={styles.kaam}>{coordinatorData?.data.user.role}</Text>
                 </View>
                 <View style={styles.rightWaala}>
                     <Image source={require('../assets/btnNotifications.png')}/>
@@ -29,7 +83,7 @@ export default function PowerWalaUser() {
             </View>
             <View style={styles.belowHeader}>
                 <Image source={require('../assets/img.png')}/>
-                <Text style={styles.wlcm}>Welcome Name</Text>
+                <Text style={styles.wlcm}>Welcome: {coordinatorData?.data.user.name}</Text>
             </View>
             <Text style={styles.task}>Tasks</Text>
             <View style={styles.grid}>
