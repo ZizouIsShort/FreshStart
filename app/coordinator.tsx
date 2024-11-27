@@ -31,6 +31,9 @@ export default function PowerWalaUser() {
     const takeToCreateStudent = async () => {
         router.push('/createStudent')
     }
+    const takeToAddBusStops = async () => {
+        router.push('/addStops')
+    }
     const [coordinatorData, setCoordinatorData] = useState<ApiResponse | null>(null);
 
     const [loading, setLoading] = useState(true);
@@ -133,7 +136,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
+                    <TouchableOpacity onPress={takeToAddBusStops}>
+                        <Image source={require('../assets/Vector 3.png')} />
+                    </TouchableOpacity>
                 </View>
             </View>
 
