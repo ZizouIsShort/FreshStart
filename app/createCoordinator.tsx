@@ -1,7 +1,8 @@
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import {useEffect, useState} from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import React, {useEffect, useState} from "react";
 import { Picker } from "@react-native-picker/picker";
 import {router} from "expo-router";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 // Define the type for school objects
 interface School {
@@ -84,89 +85,133 @@ export default function ExploreScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity onPress={submit}>
-                <Text style={styles.txt}>Create A Coordinator</Text>
-            </TouchableOpacity>
-            <TextInput
-                style={styles.input}
-                placeholder="Coordinator Name"
-                value={name}
-                onChangeText={setName}
-                keyboardType="web-search"
-                autoCapitalize="none"
-                placeholderTextColor="#1E1E1E"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Coordinator Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="web-search"
-                autoCapitalize="none"
-                placeholderTextColor="#1E1E1E"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={pass}
-                onChangeText={setPass}
-                keyboardType="web-search"
-                autoCapitalize="none"
-                placeholderTextColor="#1E1E1E"
-            />
-
-            <Picker
-                selectedValue={selectedSchool}
-                onValueChange={(itemValue) => {
-                    setSelectedSchool(itemValue); // Set the selected school's ID
-                    console.log("Selected School ID:", itemValue);
-                }}
-                style={{ width: "100%", height: 50, backgroundColor: "#D9D9D9" }} // Adjust width and height
+        <SafeAreaView style={styles.safeArea}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}
             >
-                <Picker.Item label="Select a School" value="" />
-                {schools.map((school) => (
-                    <Picker.Item key={school.id} label={school.name} value={school.id} />
-                ))}
-            </Picker>
-            <TouchableOpacity style={styles.button1} onPress={HoGaya}>
-                <Text style={styles.buttonText1}>Add Coordinator</Text>
-            </TouchableOpacity>
-        </View>
+                <ScrollView contentContainerStyle={styles.scrollContainer}>
+                    <View style={styles.formContainer}>
+                        <Text style={styles.title}>Create A Coordinator</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Coordinator Name"
+                            value={name}
+                            onChangeText={setName}
+                            autoCapitalize="words"
+                            placeholderTextColor="#6B7280"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Coordinator Email"
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            placeholderTextColor="#6B7280"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            value={pass}
+                            onChangeText={setPass}
+                            secureTextEntry
+                            autoCapitalize="none"
+                            placeholderTextColor="#6B7280"
+                        />
+                        <View style={styles.pickerContainer}>
+                            <Picker
+                                selectedValue={selectedSchool}
+                                onValueChange={(itemValue) => {
+                                    setSelectedSchool(itemValue);
+                                    console.log("Selected School ID:", itemValue);
+                                }}
+                                style={styles.picker}
+                            >
+                                <Picker.Item label="Select a School" value="" />
+                                {schools.map((school) => (
+                                    <Picker.Item key={school.id} label={school.name} value={school.id} />
+                                ))}
+                            </Picker>
+                        </View>
+                        <TouchableOpacity style={styles.button} onPress={HoGaya}>
+                            <Text style={styles.buttonText}>Add Coordinator</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
-    }
-
+}
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#F3F4F6',
+    },
     container: {
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "#e8dddc",
-        alignItems: "center",
-        height: "45%",
-        margin: "auto",
-        width: "75%",
+        flex: 1,
+    },
+    scrollContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
         padding: 20,
-        borderRadius: 15,
+    },
+    formContainer: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        padding: 24,
+        width: '100%',
+        maxWidth: 400,
+        alignSelf: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#1F2937',
+        marginBottom: 24,
+        textAlign: 'center',
     },
     input: {
-        width: "75%",
-        height: 40,
-        marginBottom: 25,
-        paddingHorizontal: 10,
-        borderRadius: 13,
-        backgroundColor: "#D9D9D9",
-    },
-    button1: {
-        backgroundColor: "#84D6F4",
-        padding: 10,
-        borderRadius: 5,
-    },
-    buttonText1: {
-        color: "black",
+        backgroundColor: '#F9FAFB',
+        borderWidth: 1,
+        borderColor: '#D1D5DB',
+        borderRadius: 12,
+        padding: 12,
+        marginBottom: 16,
         fontSize: 16,
+        color: '#1F2937',
     },
-    txt: {
-        fontSize: 16,
+    pickerContainer: {
+        backgroundColor: '#F9FAFB',
+        borderWidth: 1,
+        borderColor: '#D1D5DB',
+        borderRadius: 12,
+        marginBottom: 16,
+        overflow: 'hidden',
     },
+    picker: {
+        height: 50,
+        width: '100%',
+    },
+    button: {
+        backgroundColor: '#3B82F6',
+        borderRadius: 12,
+        padding: 16,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        fontWeight: '600',
+    }
 });

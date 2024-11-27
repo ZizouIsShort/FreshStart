@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, TouchableOpacity, Button} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, TouchableOpacity,} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Bell, Menu, User, Home, Plus, UserCircle, ChevronRight, LocateIcon } from 'lucide-react-native';
+import { Bell, Menu, User,LogOut, LocateIcon } from 'lucide-react-native';
 import MapView, {Marker} from 'react-native-maps';
-import {useNavigation} from "expo-router";
+import {router} from "expo-router";
 
 interface ApiResponse {
     success: boolean;
@@ -161,8 +161,8 @@ export default function HomeScreen() {
                     <Text style={styles.role}>{studentData.data.user.role}</Text>
                 </View>
                 <View style={styles.headerIcons}>
-                    <TouchableOpacity style={styles.iconButton}>
-                        <Bell color="#fff" size={24} />
+                    <TouchableOpacity style={styles.iconButton} onPress={() =>router.push("/")}>
+                        <LogOut color="#fff" size={24} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.iconButton}>
                         <Menu color="#fff" size={24} />

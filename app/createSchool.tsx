@@ -1,6 +1,7 @@
-import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
-import {useState} from "react";
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Platform } from "react-native";
 import {router} from "expo-router";
+import React, { useState } from 'react';;
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ExploreScreen() {
     const[skNm, setSchoolName] =  useState('');
@@ -40,71 +41,95 @@ export default function ExploreScreen() {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.txt}>
-                Create A School
-            </Text>
-            <TextInput
-                style={styles.input}
-                placeholder="School Name"
-                value={skNm}
-                onChangeText={setSchoolName}
-                keyboardType="web-search"
-                autoCapitalize="none"
-                placeholderTextColor="#1E1E1E"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="School Location"
-                keyboardType="web-search"
-                value={skLoc}
-                onChangeText={setSchoolLoc}
-                autoCapitalize="none"
-                placeholderTextColor="#1E1E1E"
-            />
-            <TouchableOpacity style={styles.button1} onPress={addingSchool}>
-                <Text style={styles.buttonText1}>Add School</Text>
-            </TouchableOpacity>
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}
+            >
+                <View style={styles.formContainer}>
+                    <Text style={styles.title}>Create A School</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="School Name"
+                        value={skNm}
+                        onChangeText={setSchoolName}
+                        keyboardType="default"
+                        autoCapitalize="words"
+                        placeholderTextColor="#6B7280"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="School Location"
+                        value={skLoc}
+                        onChangeText={setSchoolLoc}
+                        keyboardType="default"
+                        autoCapitalize="words"
+                        placeholderTextColor="#6B7280"
+                    />
+                    <TouchableOpacity style={styles.button} onPress={addingSchool}>
+                        <Text style={styles.buttonText}>Add School</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        backgroundColor: '#e8dddc',
-        alignItems: "center",
-        height: '35%',
-        margin: "auto",
-        width: '75%',
-        padding: 20,
-        borderRadius: 15,
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#F3F4F6',
     },
-    map: {
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    formContainer: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        padding: 24,
         width: '100%',
-        height: '100%',
+        maxWidth: 400,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#1F2937',
+        marginBottom: 24,
+        textAlign: 'center',
     },
     input: {
-        width: '75%',
-        height: 40,
-        marginBottom: 25,
-        paddingHorizontal: 10,
-        borderRadius: 13,
-        backgroundColor: '#D9D9D9',
-    },
-    button1: {
-        backgroundColor: '#84D6F4',
-        padding: 10,
-        borderRadius: 5,
-    },
-    buttonText1: {
-        color: 'black',
+        backgroundColor: '#F9FAFB',
+        borderWidth: 1,
+        borderColor: '#D1D5DB',
+        borderRadius: 12,
+        padding: 12,
+        marginBottom: 16,
         fontSize: 16,
+        color: '#1F2937',
     },
-    txt: {
-        fontSize: 16,
-    }
+    button: {
+        backgroundColor: '#3B82F6',
+        borderRadius: 12,
+        padding: 16,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        fontWeight: '600',
+    },
 });
 
 

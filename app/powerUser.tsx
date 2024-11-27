@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import MapView from "react-native-maps";
 import {router} from "expo-router";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import {LogOut, Menu, User, ChevronRight} from "lucide-react-native";
 
 export default function PowerWalaUser() {
     const [lastSchoolName, setLastSchoolName] = useState('School-1');
@@ -50,12 +50,16 @@ export default function PowerWalaUser() {
                     <Text style={styles.kaam}>Power User</Text>
                 </View>
                 <View style={styles.rightWaala}>
-                    <Image source={require('../assets/btnNotifications.png')}/>
-                    <Image source={require('../assets/01.png')}/>
+                    <TouchableOpacity style={styles.iconButton} onPress={() =>router.push("/")}>
+                        <LogOut color="#fff" size={24} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconButton}>
+                        <Menu color="#fff" size={24} />
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.belowHeader}>
-                <Image source={require('../assets/img.png')}/>
+                <User color="#666" size={28} />
                 <Text style={styles.wlcm}>Welcome Power User</Text>
             </View>
             <Text style={styles.task}>Tasks</Text>
@@ -67,7 +71,7 @@ export default function PowerWalaUser() {
                 <View style={styles.div2}>
                     <Text></Text>
                     <TouchableOpacity onPress={takeToSchool}>
-                        <Image source={require('../assets/Vector 3.png')}  />
+                        <ChevronRight color="#666" size={28}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -79,7 +83,7 @@ export default function PowerWalaUser() {
                 <View style={styles.div2}>
                     <Text></Text>
                     <TouchableOpacity onPress={takeToCoor}>
-                        <Image source={require('../assets/Vector 3.png')}  />
+                        <ChevronRight color="#666" size={28}/>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -141,6 +145,7 @@ const styles = StyleSheet.create({
     },
     wlcm: {
         fontSize: 25,
+        padding: 10,
         color: '#ffffff',
     },
     task: {
@@ -167,6 +172,9 @@ const styles = StyleSheet.create({
     },
     txt: {
         color: '#007B7F',
+    },
+    iconButton: {
+        padding: 4,
     },
     map: {
         marginTop: 60,
