@@ -11,6 +11,10 @@ export default function PowerWalaUser() {
         router.push('/createDriver')
     }
 
+    const takeToCreateStudent = async () => {
+        router.push('/createStudent')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -36,7 +40,9 @@ export default function PowerWalaUser() {
                 </View>
                 <View style={styles.div2}>
                     <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
+                    <TouchableOpacity onPress={takeToCreateStudent}>
+                        <Image source={require('../assets/Vector 3.png')} />
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -77,17 +83,9 @@ export default function PowerWalaUser() {
                 </View>
             </View>
 
-            <View style={styles.taskDiv}>
-                <View style={styles.div1}>
-                    <Text style={styles.txt}>See Stops</Text>
-                    <Text style={styles.txt}>Ongoing</Text>
-                </View>
-                <View style={styles.div2}>
-                    <Text></Text>
-                    <Image source={require('../assets/Vector 3.png')} />
-                </View>
+
+
             </View>
-        </View>
         </View>
     );
 }
