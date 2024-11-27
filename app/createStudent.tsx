@@ -177,7 +177,7 @@ export default function ExploreScreen() {
                 }}
                 style={{ width: "100%", height: 50, backgroundColor: "#D9D9D9" }} // Adjust width and height
             >
-                <Picker.Item label="Select a School" value="" />
+                <Picker.Item label="Select a Stop" value="" />
                 {stops.map((stops) => (
                     <Picker.Item key={stops.id} label={stops.name} value={stops.id} />
                 ))}
